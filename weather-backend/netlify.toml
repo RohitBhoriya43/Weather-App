@@ -1,6 +1,6 @@
-[functions]
-external_node_modules=["express"]
-node_modules="esbuild"
+[build]
+functions="./netlify/functions"
+node_bundler="esbuild"
 [[redirects]]
 force=true
 from = "api/v1/*"
