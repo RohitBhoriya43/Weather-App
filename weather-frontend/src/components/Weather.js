@@ -15,10 +15,11 @@ const Weather = () =>{
     const [error,setError] = useState(true)
     const [location,setLocation] = useState("delhi")
     const [newData,setNewData] = useState("")
+    const WEATHER_APP_BASE_URL = process.env.NODE_ENV==="production"?"https://r2b-weather-app.netlify.app":"http://localhost:4000"
 
     const fetchData = async (location)=>{
         try{
-            const response = await axios.get(`${process.env.WEATHER_APP_BASE_URL}/api/v1/current/weather?location=${location}`)
+            const response = await axios.get(`${WEATHER_APP_BASE_URL}/api/v1/current/weather?location=${location}`)
             console.log("weather date: ",response.data)
             setWeatherData(response.data)
             setError(false)
