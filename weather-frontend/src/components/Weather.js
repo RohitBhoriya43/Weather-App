@@ -18,7 +18,7 @@ const Weather = () =>{
 
     const fetchData = async (location)=>{
         try{
-            const response = await axios.get(`http://localhost:4000/api/v1/current/weather?location=${location}`)
+            const response = await axios.get(`${process.env.WEATHER_APP_BASE_URL}/api/v1/current/weather?location=${location}`)
             console.log("weather date: ",response.data)
             setWeatherData(response.data)
             setError(false)
