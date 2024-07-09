@@ -20,13 +20,13 @@ const currentWeather =async(req,res) =>{
         //   let index = Math.floor((24-new Date().getHours())/3)
         //     console.log("index: ", index)
         console.log("listData date",new Date(),new Date(hoursRes.data.hourly[5].dt*1000).toISOString())
-          let {dt} = hoursRes.data.current
-          let filterDate= convertFilterDate(dt)
+          let {current,timezone_offset} = hoursRes.data
+          let filterDate= convertFilterDate(current.dt,timezone_offset)
           let hourlyData = hoursRes.data.hourly.map((d)=>{
 
               return {
-                  hourTime:convertTime(new Date(d.dt*1000).toISOString()),
-                  date:new Date(d.dt*1000).toISOString(),
+                  hourTime:convertTime(new Date((d.dt+timezone_offset)*1000).toISOString()),
+                  date:new Date((d.dt+timezone_offset)*1000).toISOString(),
                   temp:d.temp,
                   icon:d.weather[0].icon
               }
@@ -121,13 +121,13 @@ const convertHoursAndMinute = (time)=>{
  
 }
 
-const convertFilterDate=(dt)=>{
+const convertFilterDate=(dt,timezone)=>{
   console.log("dt: ",dt)
-  let date = new Date(dt*1000)
+  let date = new Date((dt+timezone)*1000)
   console.log("date: ",date)
   console.log("date get hours: ",date.getHours())
-  // let hoursData = date.toISOString().split("T")[1].split(":")[0]
-  let filterDate = `${date.getFullYear()}-${date.getMonth()+1>=10?date.getMonth()+1:'0'+(date.getMonth()+1)}-${date.getDate()>=10?date.getDate():'0'+date.getDate()}T${date.getHours()}:00:00.000Z`
+  let hoursData = date.toISOString().split("T")[1].split(":")[0]
+  let filterDate = `${date.getFullYear()}-${date.getMonth()+1>=10?date.getMonth()+1:'0'+(date.getMonth()+1)}-${date.getDate()>=10?date.getDate():'0'+date.getDate()}T${hoursData}:00:00.000Z`
   console.log("filterDate",filterDate)
   return filterDate
 }
