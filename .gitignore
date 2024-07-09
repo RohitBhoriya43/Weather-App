@@ -6,6 +6,7 @@ weather-frontend/.pnp
 .pnp.js
 
 weather-backend/node_modules
+weather-backend/.env
 
 # testing
 weather-frontend/coverage
@@ -14,6 +15,7 @@ weather-frontend/coverage
 weather-frontend/build
 
 # misc
+.env
 .DS_Store
 .env.local
 .env.development.local
@@ -26,3 +28,4 @@ yarn-error.log*
 
 # # Local Netlify folder
 # .netlify
+
