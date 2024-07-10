@@ -28,7 +28,8 @@ const currentWeather =async(req,res) =>{
                   hourTime:convertTime(new Date((d.dt+timezone_offset)*1000).toISOString()),
                   date:new Date((d.dt+timezone_offset)*1000).toISOString(),
                   temp:d.temp,
-                  icon:d.weather[0].icon
+                  icon:d.weather[0].icon,
+                  ...d
               }
             })
             .filter((d)=>filterDate<=d.date)
@@ -53,7 +54,7 @@ const currentWeather =async(req,res) =>{
 
         const { description, icon } = response.data.weather[0];
         const daily =  hoursRes.data.daily[0]
-        console.log("daily dt",daily.dt,new Date(daily.dt*1000))
+        // console.log("daily dt",daily.dt,new Date(daily.dt*1000))
         let weatherData = {
           location: response.data.name,
           temperature: current.temp,
@@ -68,6 +69,7 @@ const currentWeather =async(req,res) =>{
           moonset:convertHoursAndMinute(daily.moonset,timezone_offset),
           date: convertFullDate(current.dt,timezone_offset),
           hourly:hourlyData.slice(0,10),
+          daily:hoursRes.data.daily
           // hourly:hoursRes.data,
         };
 

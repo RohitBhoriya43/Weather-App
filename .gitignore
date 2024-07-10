@@ -15,7 +15,7 @@ weather-frontend/coverage
 weather-frontend/build
 
 # misc
-.env
+weather-backend/.env
 .DS_Store
 .env.local
 .env.development.local

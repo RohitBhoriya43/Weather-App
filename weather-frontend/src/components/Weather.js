@@ -43,12 +43,12 @@ const Weather = () =>{
     }
 
     return (
-        <div>
-            <div className="p-4 bg-white shadow-md rounded-md flex flex-col md:flex-row items-center gap-4">
-            <input type="text" className="border border-gray-300 p-2 rounded-md w-full md:w-auto flex-grow" placeholder="Enter Location" onChange={(e) => setLocation(e.target.value)}/>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={handleWeatherData}>Search</button>
-        </div>
-            <div className="flex flex-col md:flex-row h-full gap-4 p-4">
+        <div className="relative">
+            <div className="fixed top-0 left-0 w-full p-4 bg-white shadow-md rounded-md flex flex-col md:flex-row items-center gap-4 z-10">
+                <input type="text" className="border border-gray-300 p-2 rounded-md w-full md:w-auto flex-grow" placeholder="Enter Location" onChange={(e) => setLocation(e.target.value)}/>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={handleWeatherData}>Search</button>
+            </div>
+            <div className="flex top-0 flex-col md:flex-row h-full gap-4 p-4 pt-36">
                 {error?<h1>Loading....</h1>:
                 (
                     <>
@@ -71,11 +71,11 @@ const Weather = () =>{
                         </div>
                         <div className="w-full md:w-2/3 flex flex-col gap-4 h-2/3 md:h-full ">
 
-                            <div className="flex-1  bg-gray-500 p-4 grid md:grid-cols-5 gap-4 rounded-3xl">
+                            <div className="flex  bg-gray-500 p-4 grid grid-cols-3 md:grid-cols-5  gap-4 rounded-3xl">
                                 {weatherData.hourly.map((i,idx)=>(
 
                                     <div className="flex flex-col justify-between p-2 rounded">
-                                        <div className="text-white text-center">
+                                        <div className="text-white text-center sm:text-sm">
                                             <span>{idx===0?"Now":i.hourTime}</span>
                                         </div>
                                         {/* <div className="border-b border-white my-2"></div> */}
